@@ -1,0 +1,73 @@
+<div *ngIf="successfullupdate" class="card" style="background-color:green!important;">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Successful Update</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="unsuccessfullupdate" class="card" style="background-color:brown!important;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Unsuccessful Update</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="selectedsport" class="card">
+    <div class="card-body">
+        <h4 class="card-title">Update Sport</h4>
+        <div class="form-group">
+          <label for="id">Id:</label>
+          <input #name type="text" class="form-control" name="" id="id" aria-describedby="helpId" placeholder="" [disabled]="true" [value]="selectedsport.id">
+          <br>
+          <label for="name">Name:</label>
+          <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="selectedsport.name">
+          <small id="helpId" class="form-text text-muted">Change name of sport</small>
+          <br>
+          <label for="logo">Logo:</label>
+          <input #logo type="text" class="form-control" name="" id="logo" aria-describedby="helpId" placeholder="" (keyup)="onLogoKey($event)" [value]="selectedsport.logo">
+          <small id="helpId" class="form-text text-muted">Change name of sport</small>
+        </div>
+        <br>
+        <button #insert type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="wrapper">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 10%!important;">Id</th>
+            <th style="width: 20%!important;">Name</th>
+            <th style="width: 50%!important;">Logo</th>
+            <th style="width: 20%!important;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let sport of sports">
+            <td scope="row">{{sport.id}}</td>
+            <td scope="row">{{sport.name}}</td>
+            <td class="logo" scope="row" style="width:45px;overflow:hidden;text-overflow:ellipsis;">{{sport.logo}}</td>
+            <td><button type="button" class="btn btn-success" (click)="selectSport(sport)">SELECT</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+

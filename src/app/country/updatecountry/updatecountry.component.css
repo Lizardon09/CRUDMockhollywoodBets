@@ -1,0 +1,45 @@
+.table thead th{
+    border-bottom: 0px!important;
+}
+
+.table{
+    border: 2px solid rgb(0, 98, 255);
+    background-color: #1e1e1e;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    table-layout: fixed ;
+    width: 100% ;
+    overflow-x: auto;
+}
+
+  .table th, .table td{
+    border-top: 1px solid #000000!important;
+  }
+
+  tr {
+    border: 2px solid rgb(0, 98, 255);
+  }
+
+  td, th {
+    width: 50% ;
+    text-align: center;
+  }
+
+  button{
+      min-width: 35%!important;
+  }
+
+  .card{
+    width: 30%!important;
+    margin: 0 auto;
+    float: none;
+    background-color: #1e1e1e;
+    color: white;
+  }
+
+  @media(max-width : 1000px){
+    .card{
+      width: 100%!important;
+    }
+  }

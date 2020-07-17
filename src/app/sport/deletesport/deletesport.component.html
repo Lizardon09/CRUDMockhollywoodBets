@@ -1,0 +1,49 @@
+<div *ngIf="successfulldelete" class="card" style="background-color:green!important;">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Successful Delete</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="unsuccessfulldelete" class="card" style="background-color:brown!important;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Unsuccessful Delete</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 10%!important;">Id</th>
+            <th style="width: 20%!important;">Name</th>
+            <th style="width: 50%!important;">Logo</th>
+            <th style="width: 20%!important;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let sport of sports">
+            <td scope="row">{{sport.id}}</td>
+            <td scope="row">{{sport.name}}</td>
+            <td scope="row">{{sport.logo}}</td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteSport(sport)">DELETE</button></td>
+        </tr>
+    </tbody>
+</table>

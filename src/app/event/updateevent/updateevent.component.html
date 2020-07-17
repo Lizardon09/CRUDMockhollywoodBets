@@ -1,0 +1,89 @@
+<div *ngIf="successfullupdate" class="card" style="background-color:green!important;">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Successful Update</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="unsuccessfullupdate" class="card" style="background-color:brown!important;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Unsuccessful Update</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="selectedevent" class="card">
+    <div class="card-body">
+        <h4 class="card-title">Update Event</h4>
+        <div class="form-group">
+
+            <label for="id">Id:</label>
+            <input #name type="text" class="form-control" name="" id="id" aria-describedby="helpId" placeholder="" [disabled]="true" [value]="selectedevent.id">
+
+            <br>
+
+            <label for="tournamentid">TournamentId:</label>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="selectedevent.tournamentId">{{selectedevent.tournamentId}}
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let tournament of tournaments" (click)="onTournamentIdKey(tournament.id)">{{tournament.id}}: {{tournament.name}}</li>
+                </ul>
+            </div> 
+            <small id="helpId" class="form-text text-muted">Select associated tournament</small>
+          
+          <br>
+
+          <label for="name">Name:</label>
+          <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="selectedevent.name">
+          <small id="helpId" class="form-text text-muted">Change name of event</small>
+
+          <br>
+
+          <label for="date">Date:</label>
+          <input #date type="datetime-local" class="form-control" name="" id="date" aria-describedby="helpId" placeholder="" (click)="onDateKey($event)" [value]="selectedevent.date">
+          <small id="helpId" class="form-text text-muted">Change date and time of event</small>
+
+        </div>
+        <br>
+        <button #insert type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
+    </div>
+</div>
+
+<br>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>TournamentId</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of events">
+            <td scope="row">{{event.id}}</td>
+            <td scope="row">{{event.tournamentId}}</td>
+            <td scope="row">{{event.name}}</td>
+            <td scope="row">{{event.date | date : "medium"}}</td>
+            <td><button type="button" class="btn btn-success" (click)="selectEvent(event)">SELECT</button></td>
+        </tr>
+    </tbody>
+</table>

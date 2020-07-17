@@ -1,0 +1,63 @@
+<div *ngIf="successfullupdate" class="card" style="background-color:green!important;">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Successful Update</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="unsuccessfullupdate" class="card" style="background-color:brown!important;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Unsuccessful Update</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="selectedtournament" class="card">
+    <div class="card-body">
+        <h4 class="card-title">Update Tournament</h4>
+        <div class="form-group">
+          <label for="id">Id:</label>
+          <input #name type="text" class="form-control" name="" id="id" aria-describedby="helpId" placeholder="" [disabled]="true" [value]="selectedtournament.id">
+          <br>
+          <label for="name">Name:</label>
+          <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="selectedtournament.name">
+          <small id="helpId" class="form-text text-muted">Change name of tournament</small>
+        </div>
+        <br>
+        <button #insert type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
+    </div>
+</div>
+
+<br>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tournament of tournaments">
+            <td scope="row">{{tournament.id}}</td>
+            <td scope="row">{{tournament.name}}</td>
+            <td><button type="button" class="btn btn-success" (click)="selectTournament(tournament)">SELECT</button></td>
+        </tr>
+    </tbody>
+</table>

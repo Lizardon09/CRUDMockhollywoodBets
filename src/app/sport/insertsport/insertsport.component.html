@@ -1,0 +1,64 @@
+<div *ngIf="successfulinsert" class="card" style="background-color:green!important;">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Successful Insert</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="unsuccessfullinsert" class="card" style="background-color:brown!important;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Unsuccessful Insert</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Insert Sport</h4>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="namefield">
+          <small id="helpId" class="form-text text-muted">Insert name of sport</small>
+          <br>
+          <label for="logo">Logo:</label>
+          <input #logo type="text" class="form-control" name="" id="logo" aria-describedby="helpId" placeholder="" (keyup)="onLogoKey($event)" [value]="logofield">
+          <small id="helpId" class="form-text text-muted">Insert logo of sport</small>
+        </div>
+        <br>
+        <button #insert type="button" class="btn btn-primary" [disabled]="disablebutton" (click)="startInsert()">Insert</button>
+    </div>
+</div>
+
+<br>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 20%!important;">Id</th>
+            <th style="width: 20%!important;">Name</th>
+            <th style="width: 60%!important;">Logo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let sport of sports">
+            <td scope="row">{{sport.id}}</td>
+            <td scope="row">{{sport.name}}</td>
+            <td scope="row">{{sport.logo}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,51 @@
+<div *ngIf="successfulldelete" class="card" style="background-color:green!important;">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Successful Delete</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="unsuccessfulldelete" class="card" style="background-color:brown!important;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <h4 class="card-title">Unsuccessful Delete</h4>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>TournamentId</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of events">
+            <td scope="row">{{event.id}}</td>
+            <td scope="row">{{event.tournamentId}}</td>
+            <td scope="row">{{event.name}}</td>
+            <td scope="row">{{event.date | date : "medium"}}</td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteEvent(event)">DELETE</button></td>
+        </tr>
+    </tbody>
+</table>
