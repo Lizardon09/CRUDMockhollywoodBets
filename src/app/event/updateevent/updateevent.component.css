@@ -1,4 +1,74 @@
 .table thead th{
+  border-bottom: 0px!important;
+}
+
+.table{
+  padding-top: 15px;
+  padding-bottom: 30px;
+  table-layout: fixed ;
+  width: 100% ;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.table th, .table td{
+  border-top: 1px solid #000000!important;
+}
+
+tr {
+  border: 1px solid #000000;
+}
+
+td, th {
+  width: 50% ;
+  text-align: center;
+}
+
+h4{
+  color: white;
+}
+
+button{
+    min-width: 35%!important;
+    background-color: white;
+}
+
+li, .dropdown-menu{
+  color: rgb(0, 98, 255)!important;
+  background-color: white!important;
+}
+
+.dropdown-menu{
+  border: rgb(0, 98, 255)!important;
+}
+
+.dropdown-menu li:hover{
+  background-color: yellowgreen!important;
+}
+
+.card{
+  width: 50%!important;
+  margin: 0 auto;
+  float: none;
+  background-color: rgb(207, 207, 207);
+  color: #6c757d;
+  margin-top: 10px;
+  border-color: rgb(52, 58, 64);
+}
+
+.card-header{
+  background-color: rgb(52, 58, 64);
+  color: white!important;
+}
+
+@media(max-width : 1000px){
+  .card{
+    width: 100%!important;
+  }
+}
+
+  /*
+  .table thead th{
     border-bottom: 0px!important;
 }
 
@@ -50,3 +120,4 @@
       width: 100%!important;
     }
   }
+  */

@@ -29,8 +29,76 @@
 <br>
 <br>
 
-<table class="table">
-    <thead>
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#TournamentBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    TournamentBettypeInfo
+</button>
+
+<div class="collapse" id="TournamentBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>TournamentId</th>
+                <th>TournamentName</th>
+                <th>BettypeId</th>
+                <th>BettypeName</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tournamentbettypeinfo of tournamentbettypeinfos">
+                <td scope="row">{{tournamentbettypeinfo.id}}</td>
+                <td scope="row">{{tournamentbettypeinfo.tournamentId}}</td>
+                <td scope="row">{{tournamentbettypeinfo.tournamentName}}</td>
+                <td scope="row">{{tournamentbettypeinfo.bettypeId}}</td>
+                <td scope="row">{{tournamentbettypeinfo.bettypeName}}</td>
+                <td><button type="button" class="btn btn-outline-danger" (click)="deleteTournamentBettype(tournamentbettypeinfo)">DELETE</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#MarketBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    TournamentSC
+</button>
+
+<div class="collapse" id="MarketBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>TournamentId</th>
+                <th>TournamentName</th>
+                <th>CountryId</th>
+                <th>CountryName</th>
+                <th>SportId</th>
+                <th>SportName</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tournamentscinfo of tournamentscinfos">
+                <td scope="row">{{tournamentscinfo.id}}</td>
+                <td scope="row">{{tournamentscinfo.tournamentId}}</td>
+                <td scope="row">{{tournamentscinfo.tournamentName}}</td>
+                <td scope="row">{{tournamentscinfo.countryId}}</td>
+                <td scope="row">{{tournamentscinfo.countryName}}</td>
+                <td scope="row">{{tournamentscinfo.sportId}}</td>
+                <td scope="row">{{tournamentscinfo.sportName}}</td>
+                <td><button type="button" class="btn btn-outline-danger" (click)="deleteTournamentSC(tournamentscinfo)">DELETE</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -41,7 +109,7 @@
         <tr *ngFor="let tournament of tournaments">
             <td scope="row">{{tournament.id}}</td>
             <td scope="row">{{tournament.name}}</td>
-            <td><button type="button" class="btn btn-danger" (click)="deleteTournament(tournament)">DELETE</button></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="deleteTournament(tournament)">DELETE</button></td>
         </tr>
     </tbody>
 </table>

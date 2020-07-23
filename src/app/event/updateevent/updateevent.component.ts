@@ -17,6 +17,7 @@ export class UpdateeventComponent implements OnInit {
   unsuccessfullupdate = false;
   disablebutton = true;
   selectedevent : IEvent;
+  tournamentfield : ITournament = {id:0,name:"Select Tournament"};
 
   constructor(private eventservice : EventService, private tournamentservice : TournamentService) { }
 
@@ -39,8 +40,9 @@ export class UpdateeventComponent implements OnInit {
     this.disableButton();
   }
 
-  onTournamentIdKey(id){
-    this.selectedevent.tournamentId = id;
+  onTournamentIdKey(tournament){
+    this.selectedevent.tournamentId = tournament.id;
+    this.tournamentfield = tournament;
     this.disableButton();
   }
 
@@ -65,6 +67,7 @@ export class UpdateeventComponent implements OnInit {
 
   selectEvent(event : any){
     this.selectedevent = {...event};
+    this.tournamentfield = this.tournaments.find(x=>x.id==event.tournamentId)
     window.scrollTo(0,0);
   }
 
@@ -81,6 +84,7 @@ export class UpdateeventComponent implements OnInit {
       this.successfullupdate = false;
     }
     this.disableButton();
+    this.tournamentfield = {id:0,name:"Select Tournament"};
     this.eventservice.getEvents().subscribe(data=>this.events=data);
     this.tournamentservice.getTournaments().subscribe(data=>this.tournaments=data);
   }

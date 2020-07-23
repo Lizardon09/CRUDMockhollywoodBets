@@ -27,8 +27,9 @@
 </div>
 
 <div *ngIf="selectedevent" class="card">
+    <div class="card-header"><h5 class="card-title">Update Event</h5></div>
     <div class="card-body">
-        <h4 class="card-title">Update Event</h4>
+        
         <div class="form-group">
 
             <label for="id">Id:</label>
@@ -38,10 +39,10 @@
 
             <label for="tournamentid">TournamentId:</label>
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="selectedevent.tournamentId">{{selectedevent.tournamentId}}
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="tournamentfield.id">{{tournamentfield.id}}: {{tournamentfield.name}}
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li *ngFor="let tournament of tournaments" (click)="onTournamentIdKey(tournament.id)">{{tournament.id}}: {{tournament.name}}</li>
+                  <li *ngFor="let tournament of tournaments" (click)="onTournamentIdKey(tournament)">{{tournament.id}}: {{tournament.name}}</li>
                 </ul>
             </div> 
             <small id="helpId" class="form-text text-muted">Select associated tournament</small>
@@ -60,15 +61,15 @@
 
         </div>
         <br>
-        <button #insert type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
+        <button #insert style="background-color: goldenrod!important;" type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
     </div>
 </div>
 
 <br>
 <br>
 
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>TournamentId</th>
@@ -83,7 +84,7 @@
             <td scope="row">{{event.tournamentId}}</td>
             <td scope="row">{{event.name}}</td>
             <td scope="row">{{event.date | date : "medium"}}</td>
-            <td><button type="button" class="btn btn-success" (click)="selectEvent(event)">SELECT</button></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="selectEvent(event)">SELECT</button></td>
         </tr>
     </tbody>
 </table>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICountry } from '../../services/country/country';
 import { CountryService } from '../../services/country/country.service';
+import { ISportCountryInfo } from '../../services/associations/sportcountryinfo';
 
 @Component({
   selector: 'app-deletecountry',
@@ -10,6 +11,7 @@ import { CountryService } from '../../services/country/country.service';
 export class DeletecountryComponent implements OnInit {
 
   countries : ICountry[] = [];
+  sportcountryinfos : ISportCountryInfo[] = [];
   successfulldelete = false;
   unsuccessfulldelete = false;
 
@@ -17,6 +19,7 @@ export class DeletecountryComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryservice.getCountries().subscribe(data=>this.countries=data);
+    this.countryservice.getSportCountryInfo().subscribe(data=>this.sportcountryinfos=data);
   }
 
   deleteCountry(country : any){
@@ -27,6 +30,16 @@ export class DeletecountryComponent implements OnInit {
           this.deleteResultStatus(data)
         })
       });
+  }
+
+  deleteSportCountry(sportcountryinfo : any){
+    this.countryservice.deleteSportCountry(sportcountryinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
   }
 
   deleteResultStatus(data : any){
@@ -43,6 +56,7 @@ export class DeletecountryComponent implements OnInit {
     }
     window.scrollTo(0,0);
     this.countryservice.getCountries().subscribe(data=>this.countries=data);
+    this.countryservice.getSportCountryInfo().subscribe(data=>this.sportcountryinfos=data);
   }
 
   closeSuccess(){

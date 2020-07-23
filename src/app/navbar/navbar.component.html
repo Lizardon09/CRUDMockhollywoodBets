@@ -1,8 +1,11 @@
 <!-- Nav tabs -->
-<ul class="nav nav-tabs mb-5" id="navId">
-    <li class="nav-item">
+<ul class="navbar nav mb-5" id="navId">
+    <a class="navbar-brand" href="#">
+        <img src="https://inm-baobab-prod-eu-west-1.s3.amazonaws.com/public/inm/media/image/115382043.JPG" width="130" height="45" alt="" (click)="goToRoute('home')" style="background-color: #1e1e1e;color: rgb(0, 98, 255);">
+    </a>
+    <!-- <li class="nav-item">
         <a href="#tab1Id" class="nav-link active" (click)="goToRoute('home')" style="background-color: #1e1e1e;color: rgb(0, 98, 255);">Home</a>
-    </li>
+    </li> -->
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bettype</a>
         <div class="dropdown-menu">
@@ -50,6 +53,10 @@
             <a class="dropdown-item" (click)="goToRoute('tournament/update')">Update</a>
             <a class="dropdown-item" (click)="goToRoute('tournament/delete')">Delete</a>
         </div>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" (click)="goToRoute('betslip')" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">BetSlip</a>
     </li>
 
 </ul>

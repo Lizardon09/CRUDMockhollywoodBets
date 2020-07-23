@@ -29,8 +29,8 @@
 <br>
 <br>
 
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>TournamentId</th>
@@ -45,7 +45,7 @@
             <td scope="row">{{event.tournamentId}}</td>
             <td scope="row">{{event.name}}</td>
             <td scope="row">{{event.date | date : "medium"}}</td>
-            <td><button type="button" class="btn btn-danger" (click)="deleteEvent(event)">DELETE</button></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="deleteEvent(event)">DELETE</button></td>
         </tr>
     </tbody>
 </table>

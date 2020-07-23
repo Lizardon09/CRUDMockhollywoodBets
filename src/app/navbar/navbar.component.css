@@ -1,9 +1,9 @@
-.nav{
+/* .nav{
     background-color: #1e1e1e!important;
     color: white;
     border: 2px solid rgb(0, 98, 255);
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .a{
@@ -21,4 +21,30 @@
 
 .dropdown-menu a:hover{
     background-color: yellowgreen!important;
+} */
+
+.nav{
+    background-color: rgb(197, 196, 196)!important;
+    color: #6c757d;
+    border: 1px solid #1e1e1e;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.a{
+    color: #6c757d;
+}
+
+.nav-link, .dropdown-item{
+    background-color: rgb(197, 196, 196)!important;
+    color: #6c757d;
+}
+
+.dropdown-menu{
+    background-color: rgb(197, 196, 196);
+}
+
+.dropdown-menu a:hover{
+    background-color: rgb(44, 121, 246)!important;
 }

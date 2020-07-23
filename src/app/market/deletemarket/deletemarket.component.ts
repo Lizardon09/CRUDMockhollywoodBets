@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IMarket } from '../../services/market/market';
 import { MarketService } from '../../services/market/market.service';
+import { IMarketBettypeInfo } from '../../services/market/marketbettypeinfo';
+import { IOddInfo } from '../../services/market/oddinfo';
 
 @Component({
   selector: 'app-deletemarket',
@@ -10,6 +12,8 @@ import { MarketService } from '../../services/market/market.service';
 export class DeletemarketComponent implements OnInit {
 
   markets : IMarket[] = [];
+  marketbettypeinfos : IMarketBettypeInfo[] = [];
+  oddinfos : IOddInfo[] = [];
   successfulldelete = false;
   unsuccessfulldelete = false;
 
@@ -17,6 +21,8 @@ export class DeletemarketComponent implements OnInit {
 
   ngOnInit(): void {
     this.marketservice.getMarkets().subscribe(data=>this.markets=data);
+    this.marketservice.getMarketBettypeInfo().subscribe(data=>this.marketbettypeinfos=data);
+    this.marketservice.getOddInfo().subscribe(data=>this.oddinfos=data);
   }
 
   deleteMarket(market : any){
@@ -27,6 +33,26 @@ export class DeletemarketComponent implements OnInit {
           this.deleteResultStatus(data)
         })
       });
+  }
+
+  deleteMarketBettype(marketbettypeinfo : any){
+    this.marketservice.deleteMarketBettype(marketbettypeinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
+  }
+
+  deleteOdd(oddinfo : any){
+    this.marketservice.deleteOdd(oddinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
   }
 
   deleteResultStatus(data : any){
@@ -43,6 +69,8 @@ export class DeletemarketComponent implements OnInit {
     }
     window.scrollTo(0,0);
     this.marketservice.getMarkets().subscribe(data=>this.markets=data);
+    this.marketservice.getMarketBettypeInfo().subscribe(data=>this.marketbettypeinfos=data);
+    this.marketservice.getOddInfo().subscribe(data=>this.oddinfos=data);
   }
 
   closeSuccess(){

@@ -19,6 +19,7 @@ export class InserteventComponent implements OnInit {
   tournamentIdfield : number = null;
   namefield : string = "";
   datefield : Date;
+  tournamentfield : ITournament = {id:0,name:"Select Tournament"};
 
   constructor(private eventservice : EventService, private tournamentservice : TournamentService) { }
 
@@ -28,7 +29,7 @@ export class InserteventComponent implements OnInit {
   }
 
   disableButton(){
-    if(this.namefield && this.tournamentIdfield && this.datefield){
+    if(this.namefield && this.tournamentfield.id>0 && this.datefield){
       this.disablebutton = false;
     }
     else{
@@ -36,8 +37,8 @@ export class InserteventComponent implements OnInit {
     }
   }
 
-  onTournamentIdKey(id){
-    this.tournamentIdfield = id;
+  onTournamentIdKey(tournament){
+    this.tournamentfield = tournament;
     this.disableButton();
   }
 
@@ -54,7 +55,7 @@ export class InserteventComponent implements OnInit {
 
   startInsert(){
     this.insertEvent({
-      tournamentId:this.tournamentIdfield,
+      tournamentId:this.tournamentfield.id,
       id:0,
       name:this.namefield,
       date:this.datefield
@@ -87,6 +88,7 @@ export class InserteventComponent implements OnInit {
     this.tournamentIdfield = -1;
     this.namefield = "";
     this.datefield = null;
+    this.tournamentfield = {id:0,name:"Select Tournament"};
     this.disableButton();
     window.scrollTo(0,0);
     this.eventservice.getEvents().subscribe(data=>this.events=data);

@@ -27,6 +27,8 @@ import { DeletetournamentComponent } from './tournament/deletetournament/deletet
 import { InserttournamentComponent } from './tournament/inserttournament/inserttournament.component';
 import { UpdatetournamentComponent } from './tournament/updatetournament/updatetournament.component';
 
+import { BetslipComponent } from './betslip/betslip.component';
+
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
 
@@ -53,6 +55,8 @@ const routes: Routes = [
   {path: 'tournament/delete', component: DeletetournamentComponent},
   {path: 'tournament/insert', component: InserttournamentComponent},
   {path: 'tournament/update', component: UpdatetournamentComponent},
+
+  {path: 'betslip', component: BetslipComponent},
 
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

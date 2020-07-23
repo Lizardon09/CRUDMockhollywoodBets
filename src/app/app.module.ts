@@ -26,6 +26,7 @@ import { UpdatesportComponent } from './sport/updatesport/updatesport.component'
 import { DeletetournamentComponent } from './tournament/deletetournament/deletetournament.component';
 import { InserttournamentComponent } from './tournament/inserttournament/inserttournament.component';
 import { UpdatetournamentComponent } from './tournament/updatetournament/updatetournament.component';
+import { BetslipComponent } from './betslip/betslip.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { UpdatetournamentComponent } from './tournament/updatetournament/updatet
     UpdatesportComponent,
     DeletetournamentComponent,
     InserttournamentComponent,
-    UpdatetournamentComponent
+    UpdatetournamentComponent,
+    BetslipComponent
   ],
   imports: [
     BrowserModule,

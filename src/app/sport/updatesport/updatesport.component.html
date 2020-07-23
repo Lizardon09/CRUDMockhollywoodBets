@@ -27,8 +27,9 @@
 </div>
 
 <div *ngIf="selectedsport" class="card">
+    <div class="card-header"><h4 class="card-title">Update Sport</h4></div>
     <div class="card-body">
-        <h4 class="card-title">Update Sport</h4>
+
         <div class="form-group">
           <label for="id">Id:</label>
           <input #name type="text" class="form-control" name="" id="id" aria-describedby="helpId" placeholder="" [disabled]="true" [value]="selectedsport.id">
@@ -42,8 +43,75 @@
           <small id="helpId" class="form-text text-muted">Change name of sport</small>
         </div>
         <br>
-        <button #insert type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
+        <button #insert style="background-color: goldenrod!important;" type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startUpdate()">Update</button>
     </div>
+</div>
+
+<div *ngIf="selectedsportcountry" class="card">
+
+    <div class="card-header"><h5 class="card-title">Update SportCountry</h5></div>
+    <div class="card-body">
+        <label for="id">Id:</label>
+        <input #name type="text" class="form-control" name="" id="id" aria-describedby="helpId" placeholder="" [disabled]="true" [value]="selectedsportcountry.id">
+        <br>
+        <div class="form-group">
+            <label for="marketid">SportId:</label>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="selectedsportcountry.sportId">{{selectedsportcountry.sportId}}: {{selectedsportcountry.sportName}}
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let sport of sports" (click)="onSportKey(sport)">{{sport.id}}: {{sport.name}}</li>
+                </ul>
+            </div> 
+            <small id="helpId" class="form-text text-muted">Select Sport to map</small>
+        </div>
+        <div class="form-group">
+            <label for="bettypeid">CountryId:</label>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="selectedsportcountry.countryId">{{selectedsportcountry.countryId}}: {{selectedsportcountry.countryName}}
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let country of countries" (click)="onSportCountryKey(country)">{{country.id}}: {{country.name}}</li>
+                </ul>
+            </div> 
+            <small id="helpId" class="form-text text-muted">Select Country to map</small>
+        </div>
+        <br>
+        <button #insert style="background-color: goldenrod!important;" type="button" class="btn btn-warning" [disabled]="disablebutton" (click)="startSportCountryUpdate()">Update</button>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#MarketBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    SportCountry
+</button>
+
+<div class="collapse" id="MarketBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>#Id</th>
+                <th>SportId</th>
+                <th>SportName</th>
+                <th>CountryId</th>
+                <th>CountryName</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sportcountryinfo of sportcountryinfos">
+                <td scope="row">{{sportcountryinfo.id}}</td>
+                <td scope="row">{{sportcountryinfo.sportId}}</td>
+                <td scope="row">{{sportcountryinfo.sportName}}</td>
+                <td scope="row">{{sportcountryinfo.countryId}}</td>
+                <td scope="row">{{sportcountryinfo.countryName}}</td>
+                <td><button type="button" class="btn btn-outline-success" (click)="selectSportCountry(sportcountryinfo)">SELECT</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <br>
@@ -51,8 +119,8 @@
 
 <div class="wrapper">
 
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th style="width: 10%!important;">Id</th>
             <th style="width: 20%!important;">Name</th>
@@ -65,7 +133,7 @@
             <td scope="row">{{sport.id}}</td>
             <td scope="row">{{sport.name}}</td>
             <td class="logo" scope="row" style="width:45px;overflow:hidden;text-overflow:ellipsis;">{{sport.logo}}</td>
-            <td><button type="button" class="btn btn-success" (click)="selectSport(sport)">SELECT</button></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="selectSport(sport)">SELECT</button></td>
         </tr>
     </tbody>
 </table>

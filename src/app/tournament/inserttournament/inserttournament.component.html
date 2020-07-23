@@ -26,24 +26,172 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Insert Tournament</h4>
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="namefield">
-          <small id="helpId" class="form-text text-muted">Insert name of tournament</small>
+<div class="row">
+
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title">Insert Tournament</h5></div>
+            <div class="card-body">
+                
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="namefield">
+                  <small id="helpId" class="form-text text-muted">Insert name of tournament</small>
+                </div>
+                <br>
+                <button #insert style="background-color: rgb(0, 98, 255)!important;" type="button" class="btn btn-primary" [disabled]="disablebutton" (click)="startInsert()">Insert</button>
+            </div>
         </div>
-        <br>
-        <button #insert type="button" class="btn btn-primary" [disabled]="disablebutton" (click)="startInsert()">Insert</button>
     </div>
+
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title">Map Tournament and Sport and Country</h5></div>
+            <div class="card-body">
+                
+                <div class="form-group">
+                    <label for="tournamentid">TournamentId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="maptournament.id">{{maptournament.id}}: {{maptournament.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let tournament of tournaments" (click)="onTournamentKey(tournament)">{{tournament.id}}: {{tournament.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Tournament to map</small>
+                </div>
+                <div class="form-group">
+                    <label for="sportid">SportId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="mapsport.id">{{mapsport.id}}: {{mapsport.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let sport of sports" (click)="onSportKey(sport)">{{sport.id}}: {{sport.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Sport to map</small>
+                </div>
+                <div class="form-group">
+                    <label for="countryid">CountryId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="mapcountry.id">{{mapcountry.id}}: {{mapcountry.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let country of countries" (click)="onCountryKey(country)">{{country.id}}: {{country.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Country to map</small>
+                </div>
+                <br>
+                <button #insert style="background-color: rgb(0, 98, 255)!important;" type="button" class="btn btn-primary" [disabled]="disableassociationbutton" (click)="startMap()">Map</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title">Map Tournament and Bettype</h5></div>
+            <div class="card-body">
+                
+                <div class="form-group">
+                    <label for="tournamentid">TournamentId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="maptournamentbettype.id">{{maptournamentbettype.id}}: {{maptournamentbettype.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let tournament of tournaments" (click)="onTournamentBettypeKey(tournament)">{{tournament.id}}: {{tournament.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Tournament to map</small>
+                </div>
+                <div class="form-group">
+                    <label for="bettypeid">BettypeId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="mapbettype.id">{{mapbettype.id}}: {{mapbettype.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let bettype of bettypes" (click)="onBettypeKey(bettype)">{{bettype.id}}: {{bettype.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Bettype to map</small>
+                </div>
+                <br>
+                <button #insert style="background-color: rgb(0, 98, 255)!important;" type="button" class="btn btn-primary" [disabled]="disablebettypeassociationbutton" (click)="startTournamentBettypeMap()">Map</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <br>
 <br>
 
-<table class="table">
-    <thead>
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#TournamentBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    TournamentBettypeInfo
+</button>
+
+<div class="collapse" id="TournamentBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>TournamentId</th>
+                <th>TournamentName</th>
+                <th>BettypeId</th>
+                <th>BettypeName</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tournamentbettypeinfo of tournamentbettypeinfos">
+                <td scope="row">{{tournamentbettypeinfo.id}}</td>
+                <td scope="row">{{tournamentbettypeinfo.tournamentId}}</td>
+                <td scope="row">{{tournamentbettypeinfo.tournamentName}}</td>
+                <td scope="row">{{tournamentbettypeinfo.bettypeId}}</td>
+                <td scope="row">{{tournamentbettypeinfo.bettypeName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#MarketBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    TournamentSC
+</button>
+
+<div class="collapse" id="MarketBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>TournamentId</th>
+                <th>TournamentName</th>
+                <th>CountryId</th>
+                <th>CountryName</th>
+                <th>SportId</th>
+                <th>SportName</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tournamentscinfo of tournamentscinfos">
+                <td scope="row">{{tournamentscinfo.id}}</td>
+                <td scope="row">{{tournamentscinfo.tournamentId}}</td>
+                <td scope="row">{{tournamentscinfo.tournamentName}}</td>
+                <td scope="row">{{tournamentscinfo.countryId}}</td>
+                <td scope="row">{{tournamentscinfo.countryName}}</td>
+                <td scope="row">{{tournamentscinfo.sportId}}</td>
+                <td scope="row">{{tournamentscinfo.sportName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>Name</th>

@@ -1,0 +1,67 @@
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>TotalStake</th>
+            <th>TotalPayout</th>
+            <th>FinalOdds</th>
+            <th>AccountId</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let betslip of betslips">
+            <td scope="row">{{betslip.id}}</td>
+            <td scope="row">R {{betslip.totalStake}}</td>
+            <td scope="row">R {{betslip.totalPayout}}</td>
+            <td scope="row">{{betslip.finalOdds}}</td>
+            <td scope="row">{{betslip.accountId}}</td>
+            <td><button type="button" class="btn btn-outline-success" (click)="selectBetSlip(betslip)">SELECT</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+
+<button  class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#BetsInfo" aria-expanded="false" aria-controls="collapseExample">
+    BetsInfo
+</button>
+
+<div *ngIf="bets" class="collapse" id="BetsInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>BetSlipId</th>
+                <th>Market</th>
+                <th>Sport</th>
+                <th>Tournament</th>
+                <th>Event</th>
+                <th>EventDate</th>
+                <th>Bettype</th>
+                <th>Odds</th>
+                <th>BetDate</th>
+                <th>Stake</th>
+                <th>Payout</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bet of bets">
+                <td scope="row">{{bet.id}}</td>
+                <td scope="row">{{bet.betSlipId}}</td>
+                <td scope="row">{{bet.marketName}}</td>
+                <td scope="row">{{bet.sportName}}</td>
+                <td scope="row">{{bet.tournamentName}}</td>
+                <td scope="row">{{bet.eventName}}</td>
+                <td scope="row">{{bet.eventDate | date : "medium"}}</td>
+                <td scope="row">{{bet.bettypeName}}</td>
+                <td scope="row">{{bet.odds}}</td>
+                <td scope="row">{{bet.betDate | date : "medium"}}</td>
+                <td scope="row">R {{bet.stake}}</td>
+                <td scope="row">R {{bet.payout}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

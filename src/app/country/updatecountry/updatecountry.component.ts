@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ICountry } from '../../services/country/country';
 import { CountryService } from '../../services/country/country.service';
+import { ISport } from 'src/app/services/sport/sport';
+import { SportService } from 'src/app/services/sport/sport.service';
+import { ISportCountry } from '../../services/associations/sportcountry';
+import { ISportCountryInfo } from '../../services/associations/sportcountryinfo';
 
 @Component({
   selector: 'app-updatecountry',
@@ -10,19 +14,24 @@ import { CountryService } from '../../services/country/country.service';
 export class UpdatecountryComponent implements OnInit {
 
   countries : ICountry[] = [];
+  sports : ISport[] = [];
+  sportcountryinfos : ISportCountryInfo[] = [];
   successfullupdate = false;
   unsuccessfullupdate = false;
   disablebutton = true;
   selectedcountry : ICountry;
+  selectedsportcountry : ISportCountryInfo;
 
-  constructor(private countryservice : CountryService) { }
+  constructor(private countryservice : CountryService, private sportservice : SportService) { }
 
   ngOnInit(): void {
     this.countryservice.getCountries().subscribe(data=>this.countries=data);
+    this.sportservice.getSports().subscribe(data=>this.sports=data);
+    this.countryservice.getSportCountryInfo().subscribe(data=>this.sportcountryinfos=data);
   }
 
   disableButton(){
-    if(this.selectedcountry.name && this.selectedcountry.logo){
+    if((this.selectedcountry && this.selectedcountry.name && this.selectedcountry.logo) || this.selectedsportcountry){
       this.disablebutton = false;
     }
     else{
@@ -40,8 +49,24 @@ export class UpdatecountryComponent implements OnInit {
     this.disableButton();
   }
 
+  onSportKey(sport){
+    this.selectedsportcountry.sportId = sport.id;
+    this.selectedsportcountry.sportName = sport.name;
+    this.disableButton();
+  }
+
+  onSportCountryKey(country){
+    this.selectedsportcountry.countryId = country.id;
+    this.selectedsportcountry.countryName = country.name;
+    this.disableButton();
+  }
+
   startUpdate(){
     this.updateCountry(this.selectedcountry);
+  }
+
+  startSportCountryUpdate(){
+    this.updateSportCountry({sportcountryid:this.selectedsportcountry.id,sportid:this.selectedsportcountry.sportId,countryid:this.selectedsportcountry.countryId});
   }
 
   updateCountry(country : ICountry){
@@ -54,9 +79,28 @@ export class UpdatecountryComponent implements OnInit {
         })
   }
 
+  updateSportCountry(sportcountry : any){
+        this.countryservice.updateSportCountry(sportcountry)
+        .subscribe(data=>{
+          console.log(data);
+          this.waitForOneSecond().then((value)=>{
+            this.updateResultStatus(data)
+          })
+        })
+  }
+
   selectCountry(country : any){
     this.selectedcountry = {...country};
+    this.selectedsportcountry = null;
     window.scrollTo(0,0);
+    this.disablebutton = true;
+  }
+
+  selectSportCountry(sportcountry : any){
+    this.selectedsportcountry = {...sportcountry};
+    this.selectedcountry = null;
+    window.scrollTo(0,0);
+    this.disablebutton = true;
   }
 
   updateResultStatus(data : any){
@@ -73,6 +117,8 @@ export class UpdatecountryComponent implements OnInit {
     }
     this.disableButton();
     this.countryservice.getCountries().subscribe(data=>this.countries=data);
+    this.sportservice.getSports().subscribe(data=>this.sports=data);
+    this.countryservice.getSportCountryInfo().subscribe(data=>this.sportcountryinfos=data);
   }
 
   closeSuccess(){

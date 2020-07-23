@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IBettype } from '../../services/bettype/bettype';
 import { BettypeService } from '../../services/bettype/bettype.service';
+import { ITournamentBettypeInfo } from '../../services/tournament/tournamentbettypeinfo';
+import { IMarketBettypeInfo } from '../../services/market/marketbettypeinfo';
+import { TournamentService } from '../../services/tournament/tournament.service';
+import { MarketService } from '../../services/market/market.service';
 
 @Component({
   selector: 'app-deletebettype',
@@ -10,13 +14,17 @@ import { BettypeService } from '../../services/bettype/bettype.service';
 export class DeletebettypeComponent implements OnInit {
 
   bettypes : IBettype[] = [];
+  tournamentbettypeinfos : ITournamentBettypeInfo[] = [];
+  marketbettypeinfos : IMarketBettypeInfo[] = [];
   successfulldelete = false;
   unsuccessfulldelete = false;
 
-  constructor(private bettypeservice : BettypeService) { }
+  constructor(private bettypeservice : BettypeService, private tournamentservice : TournamentService, private marketservice : MarketService) { }
 
   ngOnInit(): void {
     this.bettypeservice.getBettypes().subscribe(data=>this.bettypes=data);
+    this.tournamentservice.getTournamentBettypeInfo().subscribe(data=>this.tournamentbettypeinfos=data);
+    this.marketservice.getMarketBettypeInfo().subscribe(data=>this.marketbettypeinfos=data);
   }
 
   deleteBettype(bettype : any){
@@ -27,6 +35,26 @@ export class DeletebettypeComponent implements OnInit {
           this.deleteResultStatus(data)
         })
       });
+  }
+
+  deleteMarketBettype(marketbettypeinfo : any){
+    this.bettypeservice.deleteMarketBettype(marketbettypeinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
+  }
+
+  deleteTournamentBettype(tournamentbettypeinfo : any){
+    this.bettypeservice.deleteTournamentBettype(tournamentbettypeinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
   }
 
   deleteResultStatus(data : any){
@@ -43,6 +71,8 @@ export class DeletebettypeComponent implements OnInit {
     }
     window.scrollTo(0,0);
     this.bettypeservice.getBettypes().subscribe(data=>this.bettypes=data);
+    this.tournamentservice.getTournamentBettypeInfo().subscribe(data=>this.tournamentbettypeinfos=data);
+    this.marketservice.getMarketBettypeInfo().subscribe(data=>this.marketbettypeinfos=data);
   }
 
   closeSuccess(){

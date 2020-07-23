@@ -29,8 +29,40 @@
 <br>
 <br>
 
-<table class="table">
-    <thead>
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#MarketBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    SportCountry
+</button>
+
+<div class="collapse" id="MarketBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>#Id</th>
+                <th>SportId</th>
+                <th>SportName</th>
+                <th>CountryId</th>
+                <th>CountryName</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sportcountryinfo of sportcountryinfos">
+                <td scope="row">{{sportcountryinfo.id}}</td>
+                <td scope="row">{{sportcountryinfo.sportId}}</td>
+                <td scope="row">{{sportcountryinfo.sportName}}</td>
+                <td scope="row">{{sportcountryinfo.countryId}}</td>
+                <td scope="row">{{sportcountryinfo.countryName}}</td>
+                <td><button type="button" class="btn btn-outline-danger" (click)="deleteSportCountry(sportcountryinfo)">DELETE</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -43,7 +75,7 @@
             <td scope="row">{{country.id}}</td>
             <td scope="row">{{country.name}}</td>
             <td scope="row">{{country.logo}}</td>
-            <td><button type="button" class="btn btn-danger" (click)="deleteCountry(country)">DELETE</button></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="deleteCountry(country)">DELETE</button></td>
         </tr>
     </tbody>
 </table>

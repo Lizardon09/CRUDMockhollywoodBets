@@ -26,28 +26,98 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Insert Sport</h4>
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="namefield">
-          <small id="helpId" class="form-text text-muted">Insert name of sport</small>
-          <br>
-          <label for="logo">Logo:</label>
-          <input #logo type="text" class="form-control" name="" id="logo" aria-describedby="helpId" placeholder="" (keyup)="onLogoKey($event)" [value]="logofield">
-          <small id="helpId" class="form-text text-muted">Insert logo of sport</small>
+<div class="row">
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title">Insert Sport</h5></div>
+            <div class="card-body">
+                
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input #name type="text" class="form-control" name="" id="name" aria-describedby="helpId" placeholder="" (keyup)="onNameKey($event)" [value]="namefield">
+                  <small id="helpId" class="form-text text-muted">Insert name of sport</small>
+                  <br>
+                  <label for="logo">Logo:</label>
+                  <input #logo type="text" class="form-control" name="" id="logo" aria-describedby="helpId" placeholder="" (keyup)="onLogoKey($event)" [value]="logofield">
+                  <small id="helpId" class="form-text text-muted">Insert logo of sport</small>
+                </div>
+                <br>
+                <button #insert style="background-color: rgb(0, 98, 255)!important;" type="button" class="btn btn-primary" [disabled]="disablebutton" (click)="startInsert()">Insert</button>
+            </div>
         </div>
-        <br>
-        <button #insert type="button" class="btn btn-primary" [disabled]="disablebutton" (click)="startInsert()">Insert</button>
     </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title">Map Sport and Country</h5></div>
+            <div class="card-body">
+                
+                <div class="form-group">
+                    <label for="sportid">SportId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="mapsport.id">{{mapsport.id}}: {{mapsport.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let sport of sports" (click)="onSportKey(sport)">{{sport.id}}: {{sport.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Sport to map</small>
+                </div>
+                <div class="form-group">
+                    <label for="countryid">CountryId:</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" [value]="mapcountry.id">{{mapcountry.id}}: {{mapcountry.name}}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let country of countries" (click)="onCountryKey(country)">{{country.id}}: {{country.name}}</li>
+                        </ul>
+                    </div> 
+                    <small id="helpId" class="form-text text-muted">Select Country to map</small>
+                </div>
+                <br>
+                <button #insert style="background-color: rgb(0, 98, 255)!important;" type="button" class="btn btn-primary" [disabled]="disableassociationbutton" (click)="startMap()">Map</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <br>
 <br>
 
-<table class="table">
-    <thead>
+<button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#MarketBettypeInfo" aria-expanded="false" aria-controls="collapseExample">
+    SportCountry
+</button>
+
+<div class="collapse" id="MarketBettypeInfo">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>#Id</th>
+                <th>SportId</th>
+                <th>SportName</th>
+                <th>CountryId</th>
+                <th>CountryName</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sportcountryinfo of sportcountryinfos">
+                <td scope="row">{{sportcountryinfo.id}}</td>
+                <td scope="row">{{sportcountryinfo.sportId}}</td>
+                <td scope="row">{{sportcountryinfo.sportName}}</td>
+                <td scope="row">{{sportcountryinfo.countryId}}</td>
+                <td scope="row">{{sportcountryinfo.countryName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th style="width: 20%!important;">Id</th>
             <th style="width: 20%!important;">Name</th>

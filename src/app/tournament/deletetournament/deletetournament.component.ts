@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ITournament } from '../../services/tournament/tournament';
 import { TournamentService } from '../../services/tournament/tournament.service';
+import { ITournamentBettypeInfo } from '../../services/tournament/tournamentbettypeinfo';
+import { ITournamentSCInfo } from '../../services/tournament/tournamentscinfo';
 
 @Component({
   selector: 'app-deletetournament',
@@ -10,6 +12,8 @@ import { TournamentService } from '../../services/tournament/tournament.service'
 export class DeletetournamentComponent implements OnInit {
 
   tournaments : ITournament[] = [];
+  tournamentbettypeinfos : ITournamentBettypeInfo[] = [];
+  tournamentscinfos : ITournamentSCInfo[] = [];
   successfulldelete = false;
   unsuccessfulldelete = false;
 
@@ -17,6 +21,8 @@ export class DeletetournamentComponent implements OnInit {
 
   ngOnInit(): void {
     this.tournamentservice.getTournaments().subscribe(data=>this.tournaments=data);
+    this.tournamentservice.getTournamentBettypeInfo().subscribe(data=>this.tournamentbettypeinfos=data);
+    this.tournamentservice.getTournamentSCInfo().subscribe(data=>this.tournamentscinfos=data);
   }
 
   deleteTournament(tournament : any){
@@ -27,6 +33,26 @@ export class DeletetournamentComponent implements OnInit {
           this.deleteResultStatus(data)
         })
       });
+  }
+
+  deleteTournamentBettype(tournamentbettypeinfo : any){
+    this.tournamentservice.deleteTournamentBettype(tournamentbettypeinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
+  }
+
+  deleteTournamentSC(tournamentscinfo : any){
+    this.tournamentservice.deleteTournamentSC(tournamentscinfo)      
+    .subscribe(data=>{
+      console.log(data);
+      this.waitForOneSecond().then((value)=>{
+        this.deleteResultStatus(data)
+      })
+    });
   }
 
   deleteResultStatus(data : any){
@@ -43,6 +69,8 @@ export class DeletetournamentComponent implements OnInit {
     }
     window.scrollTo(0,0);
     this.tournamentservice.getTournaments().subscribe(data=>this.tournaments=data);
+    this.tournamentservice.getTournamentBettypeInfo().subscribe(data=>this.tournamentbettypeinfos=data);
+    this.tournamentservice.getTournamentSCInfo().subscribe(data=>this.tournamentscinfos=data);
   }
 
   closeSuccess(){
